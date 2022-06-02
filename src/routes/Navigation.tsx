@@ -26,7 +26,7 @@ function Navigation() {
                         </ul>
                     </nav>
                     <Suspense fallback={<>
-                        loading...
+                        <h1>Loading...</h1>
                     </>}>
 
                         <Routes>

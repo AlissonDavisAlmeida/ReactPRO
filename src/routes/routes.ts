@@ -1,10 +1,15 @@
-import { AboutPage, Home } from "../pages";
-import UsersPage from "../pages/UsersPage";
+import { lazy, LazyExoticComponent } from "react";
+
+const AboutPage = lazy(()=> import(/* webpackChunkName: 'LazyPage1' */"../pages/AboutPage"))
+const Home = lazy(()=> import(/* webpackChunkName: 'LazyPage2' */"../pages/Home"))
+const UsersPage = lazy(()=> import(/* webpackChunkName: 'LazyPage3' */"../pages/UsersPage"))
+
+type JSXComponet = () => JSX.Element
 
 interface RouteInterface {
     to: string;
     path: string;
-    Component: () => JSX.Element
+    Component: LazyExoticComponent<JSXComponet> | JSXComponet
     name: string;
 }
 
