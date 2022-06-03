@@ -30,6 +30,7 @@ function Navigation() {
                     </>}>
 
                         <Routes>
+                            
                             {routes.map(route => (
                                 <Route key={route.to} path={route.path} element={<route.Component/>}/>
                             ))}

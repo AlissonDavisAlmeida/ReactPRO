@@ -1,8 +1,10 @@
 import { lazy, LazyExoticComponent } from "react";
 
+const LazyLayout = lazy(() => import(/* webpackChunkName: '' */"../layout/LazyLayout"));
 const AboutPage = lazy(()=> import(/* webpackChunkName: 'LazyPage1' */"../pages/AboutPage"))
 const Home = lazy(()=> import(/* webpackChunkName: 'LazyPage2' */"../pages/Home"))
 const UsersPage = lazy(()=> import(/* webpackChunkName: 'LazyPage3' */"../pages/UsersPage"))
+const ShoppingPage = lazy(()=> import(/* webpackChunkName: 'LazyPage4' */"../components_patterns/pages/ShoppingPage"))
 
 type JSXComponet = () => JSX.Element
 
@@ -17,8 +19,8 @@ export const routes: RouteInterface[] = [
     {
         to: "/",
         path: "/",
-        Component: Home,
-        name: "Home"
+        Component: ShoppingPage,
+        name: "Shopping"
     },
     {
         to: "/about",
@@ -31,5 +33,6 @@ export const routes: RouteInterface[] = [
         path: "users",
         Component: UsersPage,
         name: "Users"
-    }
+    },
+   
 ]
