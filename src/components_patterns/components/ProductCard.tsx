@@ -27,7 +27,7 @@ const ProductTitle = ({ title = "" }) => {
 }
 
 
-const ProductButtons = ({counter, increaseBy}:{counter:number, increaseBy: Function})=>{
+const ProductButtons = ({counter, increaseBy    }:{counter:number, increaseBy: Function})=>{
     
     return (
         <div className={styles.buttonsContainer}>
@@ -54,7 +54,9 @@ function ProductCard({ product }: Props) {
 
             <ProductTitle title={product.title} />
             
-            <ProductButtons counter={counter} increaseBy={increaseBy}/>
+            <ProductButtons counter={counter} increaseBy={increaseBy} />
+                
+              
         </div>
     );
 }

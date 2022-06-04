@@ -16,13 +16,15 @@ code {
     monospace;
 }
 
-
-
+.main{
+  text-align: center;
+  width: 100vw;
+}
 
 .main-layout {
   display: flex;
   flex-direction: row;
- 
+  
 }
 
 nav {
