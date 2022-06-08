@@ -21,6 +21,8 @@ function ShoppingPage() {
             }}>
 
             <ProductCard product={product}/>
+            <ProductCard product={product}/>
+            <ProductCard product={product}/>
             
             </div>
         </div>
