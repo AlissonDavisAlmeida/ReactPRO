@@ -1,4 +1,5 @@
 import styles from "../styles/styles.module.css"
+import "../styles/custom_styles.css"
 import { useProduct } from "../hooks/useProduct";
 import { ProductButtons } from "./product/productButton";
 import { Provider } from "../context/ProductCardContext";
@@ -7,18 +8,17 @@ import { ProductTitle } from "./product/productTitle";
 import { ProductImage } from "./product/ProductImage";
 
 
-function ProductCard({ product }: Props) {
+function ProductCard({ product, className, showTitle, onChange }: Props) {
 
-    const { counter, increaseBy } = useProduct()
+    const { counter, increaseBy } = useProduct(onChange)
 
     return (
         <Provider value={{ counter, increaseBy, product }}>
 
-        <div className={styles.productCard}>
+        <div className={`${styles.productCard} ${className || ''}`}>
 
-            <ProductImage />
-
-            <ProductTitle/>
+            <ProductImage className={styles.productImg}/>
+            {showTitle && <ProductTitle className={styles.productDescription}/>}
 
             <ProductButtons/>
 
