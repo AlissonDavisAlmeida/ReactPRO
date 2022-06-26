@@ -1,41 +1,16 @@
-import { useCallback, useState } from "react";
 import ProductCard from "../components/ProductCard";
-import { ProductCardProps } from "../interfaces/ProductInterface";
+import { products } from "../data/products";
+import { useShoppingCart } from "../hooks/useShoppingCart";
 import "../styles/custom_styles.css"
 
-const product: ProductCardProps = {
-    id: 1,
-    title: "Coffee Mug",
-    img: "coffee-mug.png"
-
-}
-
-const product2: ProductCardProps = {
-    id: 2,
-    title: "Coffee Mug - Meme",
-    img: "coffee-mug2.png"
-}
-
-
-
-interface ProductInCart extends ProductCardProps {
-    quantity: number
-}
 
 
 
 function ShoppingPage() {
 
 
-
-    const [shoppingCart, setshoppingCart] = useState<{ [key: string]: ProductInCart }>({
-        "1": { ...product, quantity: 10 },
-        "2": { ...product2, quantity: 14 }
-    })
-
-    const onProductCountChanged = useCallback(()=>{
-        console.log("Ok, thats right now")
-    },[])
+    const { shoppingCart, onProductCountChanged } = useShoppingCart()
+  
 
     return (
         <div className="">
@@ -49,14 +24,34 @@ function ShoppingPage() {
 
             }}>
 
-                <ProductCard product={product} onChange={onProductCountChanged} showTitle />
-                <ProductCard product={product2} onChange={onProductCountChanged}  showTitle />
+                {products.map(product => (
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        onChange={onProductCountChanged}
+                        showTitle
+                        value={shoppingCart[product.id]?.quantity}
+                    />
+                ))}
+
 
             </div>
 
             <div className="shopping-cart">
-                <ProductCard product={product2} className="productCart" showTitle={false}  />
-                <ProductCard product={product} className="productCart" showTitle={false} />
+
+                {Object.values(shoppingCart).map(productCart => (
+
+                    <ProductCard key={productCart.id}
+                        product={productCart}
+                        className="productCart"
+                        showTitle={false}
+                        onChange={onProductCountChanged}
+                        value={productCart.quantity}
+                    />
+                )
+                )
+                }
+
             </div>
         </div>
     );

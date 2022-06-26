@@ -6,26 +6,27 @@ import { Provider } from "../context/ProductCardContext";
 import { Props } from "../interfaces/ProductInterface";
 import { ProductTitle } from "./product/productTitle";
 import { ProductImage } from "./product/ProductImage";
+import React from "react";
 
 
-function ProductCard({ product, className, showTitle, onChange }: Props) {
+function ProductCard({ product, className, showTitle, onChange, value }: Props) {
 
-    const { counter, increaseBy } = useProduct(onChange)
+    const { counter, increaseBy } = useProduct({ product, onChange, value })
 
     return (
         <Provider value={{ counter, increaseBy, product }}>
 
-        <div className={`${styles.productCard} ${className || ''}`}>
+            <div className={`${styles.productCard} ${className || ''}`}>
 
-            <ProductImage className={styles.productImg}/>
-            {showTitle && <ProductTitle className={styles.productDescription}/>}
+                <ProductImage className={styles.productImg} />
+                {showTitle && <ProductTitle className={styles.productDescription} />}
 
-            <ProductButtons/>
+                <ProductButtons />
 
 
-        </div>
+            </div>
         </Provider>
     );
 }
 
-export default ProductCard;
+export default React.memo(ProductCard);
