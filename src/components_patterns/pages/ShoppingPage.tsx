@@ -1,58 +1,51 @@
+import { ProductButtons } from "../components/product/productButton";
+import { ProductImage } from "../components/product/ProductImage";
+import { ProductTitle } from "../components/product/productTitle";
 import ProductCard from "../components/ProductCard";
 import { products } from "../data/products";
-import { useShoppingCart } from "../hooks/useShoppingCart";
+import { ProductCardHandlers } from "../interfaces/ProductInterface";
 import "../styles/custom_styles.css"
 
 
-
+const product = products[0]
 
 function ShoppingPage() {
 
 
-    const { shoppingCart, onProductCountChanged } = useShoppingCart()
-  
+
 
     return (
         <div className="">
             <h1>Shopping Page</h1>
 
-            <div style={{
-                width: "80%",
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
+            <ProductCard
+                key={product.id}
+                product={product}
+                showTitle
+                initialValue={{
+                    quantity: 1,
+                    maxCount: 10
+                }}
+            >
+                {(state: ProductCardHandlers) => (
+                    <>
+                        <ProductImage className={state.productImg} />
+                        {state.showTitle && <ProductTitle className={state.productDescription} />}
 
-            }}>
+                        <ProductButtons />
 
-                {products.map(product => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                        onChange={onProductCountChanged}
-                        showTitle
-                        value={shoppingCart[product.id]?.quantity}
-                    />
-                ))}
+                        <button onClick={state.reset}>reset</button>
+                        <button onClick={() =>state.increaseBy?.(-2)}>-2</button>
+                        {!state.isMaxCountReached &&
+
+                            <button onClick={()=>state.increaseBy?.(2)}>+2</button>
+                        }
+                    </>
+                )}
+
+            </ProductCard>
 
 
-            </div>
-
-            <div className="shopping-cart">
-
-                {Object.values(shoppingCart).map(productCart => (
-
-                    <ProductCard key={productCart.id}
-                        product={productCart}
-                        className="productCart"
-                        showTitle={false}
-                        onChange={onProductCountChanged}
-                        value={productCart.quantity}
-                    />
-                )
-                )
-                }
-
-            </div>
         </div>
     );
 }

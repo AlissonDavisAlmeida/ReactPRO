@@ -76,6 +76,12 @@
 
 }
 
+.disabled{
+    border-color: grey;
+    border-left:1px solid white;
+    color: grey;
+}
+
 .buttonAdd:hover {
     background-color: rgba(0, 0, 0, 0.1);
     transform: scale(1.1);

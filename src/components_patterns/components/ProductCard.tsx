@@ -1,29 +1,38 @@
 import styles from "../styles/styles.module.css"
 import "../styles/custom_styles.css"
 import { useProduct } from "../hooks/useProduct";
-import { ProductButtons } from "./product/productButton";
 import { Provider } from "../context/ProductCardContext";
 import { Props } from "../interfaces/ProductInterface";
-import { ProductTitle } from "./product/productTitle";
-import { ProductImage } from "./product/ProductImage";
 import React from "react";
 
 
-function ProductCard({ product, className, showTitle, onChange, value }: Props) {
+function ProductCard(state: Props) {
 
-    const { counter, increaseBy } = useProduct({ product, onChange, value })
+    const { counter, increaseBy, maxCount, reset, product } = useProduct({
+        product: state.product,
+        onChange: state.onChange,
+        value: state.value,
+        initialValue: state.initialValue,
+    });
 
     return (
-        <Provider value={{ counter, increaseBy, product }}>
+        <Provider value={{ counter, increaseBy, product: state.product, maxCount }}>
 
-            <div className={`${styles.productCard} ${className || ''}`}>
+            <div className={`${styles.productCard} ${state.className || ''}`}>
+                <>
 
-                <ProductImage className={styles.productImg} />
-                {showTitle && <ProductTitle className={styles.productDescription} />}
+                    {state.children({
+                        productImg: styles.productImg,
+                        showTitle: state.showTitle!,
+                        productDescription: styles.productDescription,
+                        count: counter,
+                        isMaxCountReached: !!maxCount && maxCount === counter,
+                        product,
+                        increaseBy,
+                        reset
+                    })}
 
-                <ProductButtons />
-
-
+                </>
             </div>
         </Provider>
     );
