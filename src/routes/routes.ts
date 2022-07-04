@@ -4,7 +4,6 @@ const LazyLayout = lazy(() => import(/* webpackChunkName: '' */"../layout/LazyLa
 const AboutPage = lazy(()=> import(/* webpackChunkName: 'LazyPage1' */"../pages/AboutPage"))
 const Home = lazy(()=> import(/* webpackChunkName: 'LazyPage2' */"../pages/Home"))
 const UsersPage = lazy(()=> import(/* webpackChunkName: 'LazyPage3' */"../pages/UsersPage"))
-const ShoppingPage = lazy(()=> import(/* webpackChunkName: 'LazyPage4' */"../components_patterns/pages/ShoppingPage"))
 
 type JSXComponet = () => JSX.Element
 
@@ -19,9 +18,10 @@ export const routes: RouteInterface[] = [
     {
         to: "/",
         path: "/",
-        Component: ShoppingPage,
-        name: "Shopping"
-    },
+        Component: Home,
+        name: "Home"
+    }
+    ,
     {
         to: "/about",
         path: "about",
