@@ -1,4 +1,5 @@
 import { lazy, LazyExoticComponent } from "react";
+import RegisterPage from "../forms/pages/RegisterPage";
 
 const LazyLayout = lazy(() => import(/* webpackChunkName: '' */"../layout/LazyLayout"));
 const AboutPage = lazy(()=> import(/* webpackChunkName: 'LazyPage1' */"../pages/AboutPage"))
@@ -15,6 +16,12 @@ interface RouteInterface {
 }
 
 export const routes: RouteInterface[] = [
+    {
+        to: "/register",
+        path: "register",
+        Component: RegisterPage,
+        name: "Register"
+    },
     {
         to: "/",
         path: "/",
