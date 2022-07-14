@@ -1,11 +1,14 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import "../styles/styles.css"
 import * as Yup from "yup"
+import MyTextInput from "../components/MyTextInput";
+import MySelectInput from "../components/MySelectInput";
+import MyCheckBoxInput from "../components/MyCheckboxInput";
 
-function FormikComponent() {
+function FormAbstract() {
 
 
-    return (
+    return ( 
         <div>
             <h1>Formik Components</h1>
 
@@ -35,32 +38,41 @@ function FormikComponent() {
                 {
                     formik => (
                         <Form>
-                            <label htmlFor="firstName">First Name</label>
-                            <Field name="firstName" type="text" />
-                            <ErrorMessage name="firstName" component="span" />
 
-                            <label htmlFor="lastName">Last Name</label>
-                            <Field name="lastName" type="text" />
-                            <ErrorMessage name="lastName" component="span" />
+                            <MyTextInput 
+                                label="First Name" 
+                                name="firstName"
+                                type="text"
+                                />
 
-                            <label htmlFor="email">Email</label>
-                            <Field name="email" type="email" />
-                            <ErrorMessage name="email" component="span" />
+                            <MyTextInput
+                                label="Last Name"
+                                name="lastName"
+                                type="text"
 
-                            <label htmlFor="jobType">JobType</label>
-                            <Field name="jobType" type="jobType" as="select">
+
+                                /> 
+
+                            <MyTextInput
+                                label="Email"
+                                name="email"
+                                type="email"
+                                />       
+
+                            
+                            <MySelectInput label="Job Type" name="jobType" type="jobType" as="select">
 
                                 <option value="developer">Developer</option>
                                 <option value="developer">Developer</option>
                                 <option value="developer">Developer</option>
-                            </Field>
-                            <ErrorMessage name="jobType" component="span" />
+                            </MySelectInput>
 
-                            <label>
-                                <Field name="terms" type="checkbox" />
-                                Terms
-                            </label>
-                            <ErrorMessage name="terms" component="span" />
+                            <MyCheckBoxInput 
+                            
+                                label="Accept Terms"
+                                name="terms"
+                                type="checkbox"
+                            />
 
 
                             <button type="submit">Submit</button>
@@ -75,4 +87,4 @@ function FormikComponent() {
     );
 }
 
-export default FormikComponent;
+export default FormAbstract;
