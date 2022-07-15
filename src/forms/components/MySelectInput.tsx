@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { ErrorMessage, useField } from "formik";
 
 interface MySelectInputProps {
     label: string;
@@ -6,9 +6,9 @@ interface MySelectInputProps {
     [key: string]: any;
 }
 
-function MySelectInput({ label, ...props }: MySelectInputProps) {
+export const MySelectInput= ({ label, ...props }: MySelectInputProps)=> {
 
-    const [field, meta] = useField(props)
+    const [field] = useField(props)
 
     return (
         <>
@@ -17,13 +17,8 @@ function MySelectInput({ label, ...props }: MySelectInputProps) {
                 
 
             </select>
-            {
-                meta.touched && meta.error && (
-                    <span className="error">{meta.error}</span>
-                )
-            }
+            <ErrorMessage name={props.name} component="span"/>
         </>
     );
 }
 
-export default MySelectInput;
